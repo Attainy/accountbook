@@ -10,7 +10,7 @@ function SubmitForm({ formData, setFormData, categoryOptions }) {
         price: 0,
         category: '',
         date: '',
-        memoCheck: isMemo,
+        // memoCheck: isMemo,
         memoText: '',
         repurchase: false,
     })
