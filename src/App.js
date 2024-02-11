@@ -1,4 +1,4 @@
-import { useState, useReducer } from 'react';
+import { useState, useReducer, useEffect } from 'react';
 import './App.css';
 import SubmitForm from './components/SubmitForm';
 import ItemList from './components/ItemList';
@@ -36,48 +36,52 @@ function App() {
   ]
 
   const [formData, setFormData] = useState([...testData]);
+  // const [sortedData, setSortedData] = useState([...formData]);
 
   const categoryOptions = ['식료품', '생활용품', '미용', '인테리어'];
   const sortOptions = ['가격 높은 순', '가격 낮은 순', '최신 순', '오래된 순']
 
   function reducer(state, action) {
-    switch (action.type) {
-      case 'category':
-        if (action.payload === 'all') {
-          return state;
-        } else {
-          return [...state].filter(item => item.category === action.payload);
-        }
-
-      case 'sortby':
-        if (action.payload === 'id') {
-          return state.sort((a, b) => a.id - b.id)
-        } else if (action.payload === '가격 높은 순') {
-          return state.sort((a, b) => b.price - a.price)
-        } else if (action.payload === '가격 낮은 순') {
-          return state.sort((a, b) => a.price - b.price)
-        } else if (action.payload === '최신 순') {
-          return state.sort((a, b) => new Date(b) - new Date(a))
-        } else { // (action.payload === '오래된 순') 
-          return state.sort((a, b) => new Date(a) - new Date(b))
-        }
-
-      case 'start-date':
-        return state.filter(item => new Date(item.date) >= new Date(action.payload))
-
-      case 'end-date':
-        return state.filter(item => new Date(item.date) <= new Date(action.payload))
+    return {
+      ...state,
+      [action.type] : action.payload
     }
-  }
+  };
+  const initialState = {
+    'category': 'all',
+    'sortOrder': 'id',
+    'startDate': 'all',
+    'endDate': 'all'
+  };
+  const [sortBy, dispatch] = useReducer(reducer, initialState);
 
-  const [sortedData, dispatch] = useReducer(reducer, [...formData]);
+  // useEffect(() => {
+  //   if (sortBy.category === 'all') {
+  //     setSortedData(formData);
+  //   } else {
+  //     setSortedData(sortedData.filter(item => item.category === sortBy.category));
+  //   }
 
+  //   switch (sortBy.sortOrder) {
+  //     case 'id':
+  //       setSortedData(formData);
+  //     case '가격 높은 순':
+  //       setSortedData(sortedData.sort((a, b) => b.price - a.price))
+  //       console.log(sortedData)
+  //     case '가격 낮은 순':
+  //       setSortedData(sortedData.sort((a, b) => a.price - b.price))
+  //     case '최신 순':
+  //       setSortedData(sortedData.sort((a, b) => new Date(b) - new Date(a)))
+  //     case '오래된 순':
+  //       setSortedData(sortedData.sort((a, b) => new Date(a) - new Date(b)))
+  //   }
+  // }, [sortBy, formData])
 
   return (
     <div className="App">
       <SubmitForm formData={formData} setFormData={setFormData} categoryOptions={categoryOptions}/>
       <SortButtons dispatch={dispatch} categoryOptions={categoryOptions} sortOptions={sortOptions}/>
-      <ItemList sortedData={sortedData}/>
+      <ItemList sortBy={sortBy} formData={formData}/>
     </div>
   );
 }

@@ -13,7 +13,7 @@ function SortButtons({ dispatch, categoryOptions, sortOptions }) {
             }
         </select>
 
-        <select className='sort-buttons__button--sort' onChange={(event) => dispatch({ type:'sortby', payload:event.target.value })}>
+        <select className='sort-buttons__button--sort' onChange={(event) => dispatch({ type:'sortOrder', payload:event.target.value })}>
             <option value='id'>정렬 기준</option>
             {
                 sortOptions.map((option, index) => (
@@ -24,13 +24,15 @@ function SortButtons({ dispatch, categoryOptions, sortOptions }) {
 
         <div>
             <label htmlFor="start-date">시작 기간</label>
-            <input type="date" id="start-date" onChange={(event) => dispatch({ type:'start-date', payload:event.target.value })}/>
+            <input type="date" id="start-date" onChange={(event) => dispatch({ type:'startDate', payload:event.target.value })}/>
         </div>
 
         <div>
             <label htmlFor="end-date">끝 기간</label>
-            <input type="date" id="end-date" onChange={(event) => dispatch({ type:'end-date', payload:event.target.value })}/>
+            <input type="date" id="end-date" onChange={(event) => dispatch({ type:'endDate', payload:event.target.value })}/>
         </div>
+
+        <button type="reset">RESET</button>
     </div>
   )
 }
