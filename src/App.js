@@ -36,26 +36,26 @@ function App() {
   ]
 
   const [formData, setFormData] = useState([...testData]);
-  // const [sortedData, setSortedData] = useState([...formData]);
+  const [sortedData, setSortedData] = useState([...formData]);
 
   const categoryOptions = ['식료품', '생활용품', '미용', '인테리어'];
   const sortOptions = ['가격 높은 순', '가격 낮은 순', '최신 순', '오래된 순']
 
-  function reducer(state, action) {
-    return {
-      ...state,
-      [action.type] : action.payload
-    }
-  };
-  const initialState = {
-    'category': 'all',
-    'sortOrder': 'id',
-    'startDate': 'all',
-    'endDate': 'all'
-  };
-  const [sortBy, dispatch] = useReducer(reducer, initialState);
+  // function reducer(state, action) {
+  //   return {
+  //     ...state,
+  //     [action.type] : action.payload
+  //   }
+  // };
+  // const initialState = {
+  //   'category': 'all',
+  //   'sortOrder': 'id',
+  //   'startDate': 'all',
+  //   'endDate': 'all'
+  // };
+  // const [sortBy, dispatch] = useReducer(reducer, initialState);
 
-  // useEffect(() => {
+
   //   if (sortBy.category === 'all') {
   //     setSortedData(formData);
   //   } else {
@@ -75,13 +75,15 @@ function App() {
   //     case '오래된 순':
   //       setSortedData(sortedData.sort((a, b) => new Date(a) - new Date(b)))
   //   }
-  // }, [sortBy, formData])
+
 
   return (
     <div className="App">
       <SubmitForm formData={formData} setFormData={setFormData} categoryOptions={categoryOptions}/>
-      <SortButtons dispatch={dispatch} categoryOptions={categoryOptions} sortOptions={sortOptions}/>
-      <ItemList sortBy={sortBy} formData={formData}/>
+      {/* <SortButtons dispatch={dispatch} categoryOptions={categoryOptions} sortOptions={sortOptions}/> */}
+      <SortButtons sortedData={sortedData} setSortedData={setSortedData} categoryOptions={categoryOptions} sortOptions={sortOptions}/>
+      {/* <ItemList sortBy={sortBy} formData={formData}/> */}
+      <ItemList sortedData={sortedData} formData={formData}/>
     </div>
   );
 }
