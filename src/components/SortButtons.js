@@ -7,14 +7,6 @@ function SortButtons({ sortedData, setSortedData, categoryOptions, sortOptions }
             setSortedData(sortedData.filter(item => item.category === event.target.value));
             console.log(sortedData)
         }
-
-        // if (event.target.value !== 'all') {
-        //     setSortedData(prev => {
-        //         return {
-        //             prev.filter(item => item.category === event.target.value)
-        //         }});
-        //     console.log(sortedData)
-        // }
     }
 
     const sortBy = (event) => {
@@ -22,12 +14,23 @@ function SortButtons({ sortedData, setSortedData, categoryOptions, sortOptions }
         switch (event.target.value) {
             // case 'id':
             //     setSortedData(formData);
+
+            // setItems((prev) => {
+            //     const newArray = prev.sort((a, b) => b.id - a.id);
+            //     return newArray;
+            //   });
+
             case '가격 높은 순':
-                sample = sortedData.sort((a, b) => b.price - a.price)
-                setSortedData(sample)
+                setSortedData(prev => {
+                    let sample = prev.sort((a, b) => b.price - a.price);
+                    return sample
+                })
+                console.log(sortedData)
             case '가격 낮은 순':
-                sample = sortedData.sort((a, b) => a.price - b.price)
-                setSortedData(sample)
+                setSortedData(prev => {
+                    let sample = prev.sort((a, b) => a.price - b.price);
+                    return sample
+                })
                 // setSortedData(sortedData.sort((a, b) => a.price - b.price))
             case '최신 순':
                 setSortedData(sortedData.sort((a, b) => new Date(b) - new Date(a)))
@@ -45,28 +48,6 @@ function SortButtons({ sortedData, setSortedData, categoryOptions, sortOptions }
         setSortedData(sortedData.filter(item => new Date(item.date) <= new Date(event.target.value)))
     }
 
-
-    
-
-    // if (sortBy.category === 'all') {
-    //     setSortedData(formData);
-    //     } else {
-    //     setSortedData(sortedData.filter(item => item.category === sortBy.category));
-    //     }
-    
-    //     switch (sortBy.sortOrder) {
-    //     case 'id':
-    //         setSortedData(formData);
-    //     case '가격 높은 순':
-    //         setSortedData(sortedData.sort((a, b) => b.price - a.price))
-    //         console.log(sortedData)
-    //     case '가격 낮은 순':
-    //         setSortedData(sortedData.sort((a, b) => a.price - b.price))
-    //     case '최신 순':
-    //         setSortedData(sortedData.sort((a, b) => new Date(b) - new Date(a)))
-    //     case '오래된 순':
-    //         setSortedData(sortedData.sort((a, b) => new Date(a) - new Date(b)))
-    //     }
 
   return (
     <div className='sort-buttons'>
