@@ -10,34 +10,26 @@ function SortButtons({ sortedData, setSortedData, categoryOptions, sortOptions }
     }
 
     const sortBy = (event) => {
-        let sample;
+        console.log(event.target.value);
         switch (event.target.value) {
-            // case 'id':
-            //     setSortedData(formData);
-
-            // setItems((prev) => {
-            //     const newArray = prev.sort((a, b) => b.id - a.id);
-            //     return newArray;
-            //   });
-
             case '가격 높은 순':
                 setSortedData(prev => {
-                    let sample = prev.sort((a, b) => b.price - a.price);
-                    return sample
-                })
-                console.log(sortedData)
+                    return prev.sort((a, b) => b.price - a.price)
+                });
+                break;
             case '가격 낮은 순':
                 setSortedData(prev => {
-                    let sample = prev.sort((a, b) => a.price - b.price);
-                    return sample
-                })
-                // setSortedData(sortedData.sort((a, b) => a.price - b.price))
+                    return prev.sort((a, b) => a.price - b.price)
+                });
+                break;
             case '최신 순':
-                setSortedData(sortedData.sort((a, b) => new Date(b) - new Date(a)))
+                setSortedData(prev => prev.sort((a, b) => new Date(b) - new Date(a)))
+                break;
             case '오래된 순':
-                setSortedData(sortedData.sort((a, b) => new Date(a) - new Date(b)))
+                setSortedData(prev => prev.sort((a, b) => new Date(a) - new Date(b)))
+                break;
         }
-        console.log('sortBy', sortedData)
+        console.log(sortedData)
     }
 
     const sortStartDate = (event) => {

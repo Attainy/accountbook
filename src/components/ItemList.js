@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 
 function ItemList({ sortedData, formData }) {
-    // const [sortedData, setSortedData] = useState([...formData]);
-
 
         return (
             <div className='item-list'>
