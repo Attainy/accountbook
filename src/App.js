@@ -36,7 +36,12 @@ function App() {
   ]
 
   const [formData, setFormData] = useState([...testData]);
-  const [sortedData, setSortedData] = useState([...formData]);
+  const [sortFilter, setSortFilter] = useState({
+    'category': 'all',
+    'sort': 'id',
+    'startDate': '',
+    'endDate': ''
+  })
 
   const categoryOptions = ['식료품', '생활용품', '미용', '인테리어'];
   const sortOptions = ['가격 높은 순', '가격 낮은 순', '최신 순', '오래된 순']
@@ -44,8 +49,8 @@ function App() {
   return (
     <div className="App">
       <SubmitForm formData={formData} setFormData={setFormData} categoryOptions={categoryOptions}/>
-      <SortButtons sortedData={sortedData} setSortedData={setSortedData} categoryOptions={categoryOptions} sortOptions={sortOptions}/>
-      <ItemList sortedData={sortedData} formData={formData}/>
+      <SortButtons setSortFilter={setSortFilter} categoryOptions={categoryOptions} sortOptions={sortOptions}/>
+      <ItemList formData={formData} sortFilter={sortFilter}/>
     </div>
   );
 }
