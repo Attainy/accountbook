@@ -1,7 +1,6 @@
 import React from 'react'
 
 function SortButtons({ setSortFilter, categoryOptions, sortOptions }) {
-    console.log('SortButtons')
     const handleSort = (event) => {
         let targetName = event.target.name;
         let targetValue = event.target.value;

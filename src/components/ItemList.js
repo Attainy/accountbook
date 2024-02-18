@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
 function ItemList({ formData, sortFilter }) {
-    // const [sortedData, setSortedData] = useState([...formData]);
-    console.log('ItemList')
-    console.log(sortFilter)
-
     let sortedData = [...formData];
     if (sortFilter.category !== 'all') {
         sortedData = sortedData.filter(item => item.category === sortFilter.category)
@@ -17,9 +13,9 @@ function ItemList({ formData, sortFilter }) {
             sortedData.sort((a, b) => a.price - b.price)
             break;
         case '최신 순':
-            sortedData.sort((a, b) => new Date(b) - new Date(a))
+            sortedData.sort((a, b) => Number(new Date(a.date) - new Date(b.date)))
         case '오래된 순':
-            sortedData.sort((a, b) => new Date(a) - new Date(b))
+            sortedData.sort((a, b) => Number(new Date(b.date) - new Date(a.date)))
             break;
     }
 
