@@ -5,6 +5,7 @@ import ItemList from './components/ItemList';
 import SortButtons from './components/SortButtons';
 
 function App() {
+  console.log('App')
   const testData = [
     {
       id: 9999999999991,

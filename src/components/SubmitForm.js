@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 // useState로만 해보기
 function SubmitForm({ formData, setFormData, categoryOptions }) {
+    console.log("SubmitForm")
     const [isMemo, setIsMemo] = useState(false);
 
     const [newData, setNewData] = useState({
