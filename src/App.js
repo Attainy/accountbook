@@ -49,7 +49,7 @@ function App() {
   return (
     <div className="App">
       <SubmitForm formData={formData} setFormData={setFormData} categoryOptions={categoryOptions}/>
-      <SortButtons setSortFilter={setSortFilter} categoryOptions={categoryOptions} sortOptions={sortOptions}/>
+      <SortButtons sortFilter={sortFilter} setSortFilter={setSortFilter} categoryOptions={categoryOptions} sortOptions={sortOptions}/>
       <ItemList formData={formData} sortFilter={sortFilter}/>
     </div>
   );

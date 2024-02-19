@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 function ItemList({ formData, sortFilter }) {
     let sortedData = [...formData];
@@ -19,12 +19,12 @@ function ItemList({ formData, sortFilter }) {
             break;
     }
 
-    if (sortFilter.startDate != '') {
-        sortedData.filter(item => new Date(item.date) >= new Date(sortFilter.startDate))
+    if (sortFilter.startDate !== '') {
+        sortedData = sortedData.filter(item => new Date(item.date) >= new Date(sortFilter.startDate))
     }
 
-    if (sortFilter.endDate != '') {
-        sortedData.filter(item => new Date(item.date) <= new Date(sortFilter.endDate))
+    if (sortFilter.endDate !== '') {
+        sortedData = sortedData.filter(item => new Date(item.date) <= new Date(sortFilter.endDate))
     }
 
     console.log(sortedData)
